@@ -48,12 +48,13 @@ Update `backend/.env` with `DB_HOST`, `DB_USER`, `DB_PASS`, `DB_NAME` values and
 
 ## Features included
 
-- Cashier checkout with product search, quantity controls, promotions, receipt-ready completion, and cash/card/mobile-money/QR payment selection.
+- Separate Home, Catalog, and Checkout cashier workflow with a shared cart, quantity controls, promotions, customer name, receipt summary, and cash/card/mobile-money/QR payment selection.
 - Manager overview with sales totals, transaction count, low-stock count, and top-product signal.
 - Manager inventory table with reorder indicators.
 - JWT authentication and Cashier/Manager authorization.
 - MySQL tables for users, products, inventory, sales, sale items, returns, payments, and discounts with foreign keys and indexes.
 - Atomic MySQL checkout transaction: sale, items, payment, and inventory decrement commit together.
+- Inventory quantities are shown in Catalog, synchronized in `products.stock_quantity` and `inventory.quantity`, decremented by sales, and restored by validated returns. Existing MySQL/XAMPP databases can run `database/migration_stock_quantity.sql`.
 - Offline browser queue when network connectivity drops; queued payloads are stored in local storage for a later sync implementation.
 - Input validation and consistent JSON error handling.
 - Pattern evidence and architecture diagram in `docs/architecture.md`.
